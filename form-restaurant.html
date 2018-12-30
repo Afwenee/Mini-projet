@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<title>Restaurant</title>
+<link rel="stylesheet" href="./CSS/jquery-ui.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+  
+#div_resume {
+  background-color:#6699FF; 
+  border: 2px solid; 
+  padding: 5px;
+}
+body{
+  background-image: url("./img/background.jpg");
+  background-repeat: no-repeat;
+  height: 100%; 
+  background-size: cover;
+}
+#cont{
+  width:70%;
+  height:60;
+  background-color: antiquewhite;
+  padding: 50px 50px ;
+  margin: 100px 100px;
+  border-radius: 100px  
+  
+  }
+  h1,h2{
+    color:#6699FF ;
+  }
+  #afwene{
+    margin-left:300px;
+    height: 250px;
+    width:150px;
+    border-radius: 50%;
+    border:2px solid white;
+  }
+</style>
+
+</head>
+
+<body>
+<div id="cont">
+<h1>Commandez votre table </h1>
+<p>Ce formulaire permet de commander une table dans notre restaurant, ensuite vous pouvez commande vos plats. Il faudra aussi indiquer vos coordonn&eacute;es et dans le cas de plusieurs personne, indiquer le nom de chacun d'entre eux.</p>
+<form id="form1" name="form1" method="post" action="">
+  Table pour combien de personnes ? 
+    <select name="nbp" id="nbp">
+      <option value="-1">--Veuillez choisir---</option>
+      <option value="1">Une place</option>
+      <option value="2">Deux places</option>
+      <option value="4">4 places</option>
+      <option value="6">6 places</option>
+    </select>
+    <br />
+    <div id="chaises"></div>
+    <br />
+A quelle date vous allez venir ? 
+<br />
+<input type="text" name="date" id="date" />
+<img src="img/afwene2018.jpg" id="afwene" alt="no afwene">
+
+
+
+<hr/>
+
+
+<h2>Vos coordon&eacute;es</h2>
+Civilit&eacute; : 
+<input name="civilite" type="radio" value="mme" />
+Madamme 
+<input name="civilite" type="radio" value="mlle" />
+Mademoiselle 
+<input name="civilite" type="radio" value="m" />
+Monsieur 
+<br />
+Nom et pr&eacute;nom  : 
+  <input name="nom" type="text" id="nom" size="60" />
+
+<br />
+N&deg; de t&eacute;l&eacute;phone : 
+<input name="tel" type="text" id="tel" />
+<br />
+<div id="div_accompagnateurs">Liste des accompagnateurs (une personne par ligne):
+  <br />
+  <textarea name="accompagnateurs" cols="60" rows="4" id="accompagnateurs"></textarea>
+  <br />
+</div>
+
+
+<hr />
+
+
+
+<h2>Que voulez-vous manger ?  </h2>
+<label>
+<input name="cmd" type="checkbox" value="Salade" data-prix="5" />
+Salade</label>
+<label> <br />
+<input name="cmd" type="checkbox" value="Soupe" data-prix="2.5" />
+Soupe </label>
+<br />
+<label>
+<input name="cmd" type="checkbox" value="Couscous" data-prix="15.5" />
+Couscous</label>
+<br />
+<label>
+<input name="cmd" type="checkbox" value="Riz" data-prix="12" />
+Riz</label>
+<br />
+<label>
+<input name="cmd" type="checkbox" value="Fruits" data-prix="7" />
+Fruits </label>
+<label> <br />
+<input name="cmd" type="checkbox" value="Gateaux" data-prix="6.4" />
+Gateaux</label>
+
+<hr /> 
+
+  <br />
+  <input name="b1" type="button" id="b1" value="Valider ma commande" />
+  <br />
+  
+  <br />
+  <div id="div_resume">
+    Afficher le r&eacute;sum&eacute; ici ...
+  </div>
+  <p>&nbsp;</p>
+</form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</body>
+
+<!-- Les code Javascript CI-DESSOUS uniquement -->
+<script>
+     $(document).ready(function () {
+
+    $("#nbp").change(function () {
+      var nbchaire = $(this)
+        .children("option:selected")
+        .val();
+      switch (nbchaire) {
+        case "1":
+          $("#chaises").empty();
+          $("#chaises").append('<img id="chaise" src="./img/chaise.jpeg" />');
+          break;
+        case "2":
+          $("#chaises").empty();
+          $("#chaises").append('<img id="chaise" src="./img/chaise.jpeg" />');
+          $("#chaises").append('<img id="chaise" src="./img/chaise.jpeg" />');
+          break;
+        case "4":
+          $("#chaises").empty();
+            $("#chaises").append('<img id="chaise" src="./img/chaise.jpeg" />');
+          for (i = 0; i < 4; i++) {
+          }
+          break;
+        case "6":
+          $("#chaises").empty();
+          for (i = 0; i < 6; i++) {
+            $("#chaises").append('<img id="chaise" src="./img/chaise.jpeg" />');
+          }        
+          break;
+        default:
+          $("#chaises").empty();
+          break;
+      }
+    });
+
+    
+    $( "#date" ).datepicker();
+    
+    $("#b1").click(function () {
+
+     
+      if( !($("input:radio").is(':checked')))
+      {
+        alert("stp choisir votre civilité");
+      }
+      if($("#nom").val()=="")
+      {
+      alert("choisir votre nom et prenom")
+      }
+      if ((isNaN( $("#tel").val() ))||($("#tel").val()=="")||((($("#tel").val()).length)>=9)){
+        alert("veuille entrer le numero de telepohone proprement");
+      }if($("#date").val()==""){
+        alert("choisir une date ")
+      }if($("#nbp")
+        .children("option:selected")
+        .val()==-1){
+          alert("choisir le nombre de chaise ")
+        }
+        
+        
+        var commande=[];
+        var prix = 0;
+        $.each($("input[name='cmd']:checked"), function () {
+        commande.push($(this).val());
+        prix += Number($(this).attr("data-prix") ); 
+        });
+        if (prix==0 ||commande.length < 1) 
+        {
+        alert("Choisir que voulez vous manger");
+        }
+        
+        else
+        {
+
+        civilité = $("input[name='civilite']:checked").val();
+        if (civilité == "m") {
+          civilité = "Monsieur";
+        } else if (civilité == "mme") {
+          civilité = "Madamme";
+        } else if (civilité == "mlle") {
+          civilité = "Mademoiselle";
+        }
+        var lescommandes = "";
+        for (i = 0; i < commande.length; i++) {
+          lescommandes += "<li>" + commande[i] + "</li>";
+        }
+          resume =
+          "Bonjour " +
+          civilité +
+          " <b>" +
+          $("#nom").val() +
+          " ,</b> <br/ >" +
+          "Votre commande du <u>" +
+          $("#date").val() +
+          " </u> a bien  été validée <br />" +
+          "les plat commandés sont : <ul> " +
+            lescommandes +
+          "</ul>Le montant total de la commande  est de <b>" +
+          prix +
+          "</b> Dinars "+
+          "<br> au rendez Vous ";
+          document.getElementById("div_resume").innerHTML = resume;
+        
+            
+        } 
+    });
+
+
+ 
+
+
+
+
+
+  });
+</script>
+
+</html>
